@@ -89,3 +89,6 @@ DROP TABLE IF EXISTS employee;
 hbase shell
 scan 'portal:company_base'
 ```
+```
+https://www.yiibai.com/hbase/hbase_shell.html#article-start
+```
