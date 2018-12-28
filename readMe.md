@@ -159,6 +159,7 @@ deleteall 'emp','1'
 - 表的计数
 ```
 count '<table name>'
+count不建议使用，表很大时，执行会很慢
 truncate 'table name'
 ```
 
