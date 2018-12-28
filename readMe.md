@@ -133,3 +133,45 @@ put 'emp','1','personal data:city','hyderabad'
 put 'emp','1','professional
 put 'emp','1','professional data:salary','50000'
 ```
+
+- 更新数据
+```
+put ‘table name’,’row ’,'Column family:column name',’new value’
+```
+
+- 读取数据
+```
+get '<table name>’,’row1'
+get 'emp', '1'
+get 'table name', 'rowid', {COLUMN => 'column family:column name'}
+get 'emp', 'row1', {COLUMN=>'personal:name'}
+```
+
+- 删除数据
+```
+delete ‘<table name>’, ‘<row>’, ‘<column name >’, ‘<time stamp>’
+delete 'emp', '1', 'personal data:city',
+
+deleteall ‘<table name>’, ‘<row>’,
+deleteall 'emp','1'
+```
+
+- 表的计数
+```
+count '<table name>'
+truncate 'table name'
+```
+
+- 权限与安全
+```
+grant <user> <permissions> [<table> [<column family> [<column; qualifier>]]
+
+R - 代表读取权限 W - 代表写权限 X - 代表执行权限 C - 代表创建权限 A - 代表管理权限
+grant 'Tutorialspoint', 'RWXCA'
+
+revoke <user>
+revoke 'Tutorialspoint'
+
+user_permission ‘tablename’
+user_permission 'emp'
+```
