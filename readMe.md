@@ -10,6 +10,7 @@ use cscs_sandbox;
 show tables;
 desc tmp_htable_compy_basicinfo_yx;
 show create table tmp_htable_compy_basicinfo_yx;
+show partitions employee;
 ```
 
 - create hive table
@@ -75,4 +76,10 @@ partition_spec:
 ```
 ALTER TABLE table_name DROP
     partition_spec, partition_spec,...
+```
+
+- 删除表
+```
+DROP TABLE [IF EXISTS] table_name;
+DROP TABLE IF EXISTS employee;
 ```
