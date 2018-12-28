@@ -92,3 +92,44 @@ scan 'portal:company_base'
 ```
 https://www.yiibai.com/hbase/hbase_shell.html#article-start
 ```
+
+- 退出shell
+```
+exit
+停止hbase
+./bin/stop-hbase.sh
+```
+
+- 创建表
+```
+create '<table name>','<column family>' 
+create 'emp', 'personal data', 'professional data'
+exists 'emp'
+list
+```
+
+- 禁用/启用
+```
+disable 'emp'
+is_disabled 'table name'
+enable 'emp'
+disable_all 'r.*'
+is_enabled 'table name'
+```
+
+- 删除表 | 删除前必须禁用
+```
+disable 'emp'
+drop 'emp'
+drop_all 't.*' 
+```
+
+- 创建数据
+```
+put '<table name>','row1','<colfamily:colname>','<value>'
+
+put 'emp','1','personal data:name','raju'
+put 'emp','1','personal data:city','hyderabad'
+put 'emp','1','professional
+put 'emp','1','professional data:salary','50000'
+```
