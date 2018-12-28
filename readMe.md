@@ -54,3 +54,25 @@ ALTER TABLE employee CHANGE name ename String;
 ALTER TABLE employee ADD COLUMNS (dept STRING COMMENT 'Department name');
 ALTER TABLE employee REPLACE COLUMNS (eid INT empid Int, ename STRING name String);
 ```
+
+- 分区
+```
+ALTER TABLE table_name ADD
+  partition_spec [ LOCATION 'location1' ]
+  partition_spec [ LOCATION 'location2' ] ...
+
+partition_spec:
+  : PARTITION (partition_col = partition_col_value,
+        partition_col = partiton_col_value, ...)
+```
+```
+ ALTER TABLE page_view ADD
+    PARTITION (dt='2008-08-08', country='us')
+      location '/path/to/us/part080808'
+    PARTITION (dt='2008-08-09', country='us')
+      location '/path/to/us/part080809';
+```
+```
+ALTER TABLE table_name DROP
+    partition_spec, partition_spec,...
+```
