@@ -163,6 +163,11 @@ count不建议使用，表很大时，执行会很慢
 truncate 'table name'
 ```
 
+- hbase表计数的方式
+```
+
+```
+
 - 权限与安全
 ```
 grant <user> <permissions> [<table> [<column family> [<column; qualifier>]]
