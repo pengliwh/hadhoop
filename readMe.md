@@ -83,3 +83,9 @@ ALTER TABLE table_name DROP
 DROP TABLE [IF EXISTS] table_name;
 DROP TABLE IF EXISTS employee;
 ```
+
+## Hbase
+```
+hbase shell
+scan 'portal:company_base'
+```
