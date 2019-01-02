@@ -136,12 +136,12 @@ put 'emp','1','professional data:salary','50000'
 
 - 更新数据
 ```
-put ‘table name’,’row ’,'Column family:column name',’new value’
+put 'table name','row','Column family:column name','new value'
 ```
 
 - 读取数据
 ```
-get '<table name>’,’row1'
+get '<table name>','row1'
 get 'emp', '1'
 get 'table name', 'rowid', {COLUMN => 'column family:column name'}
 get 'emp', 'row1', {COLUMN=>'personal:name'}
@@ -149,10 +149,10 @@ get 'emp', 'row1', {COLUMN=>'personal:name'}
 
 - 删除数据
 ```
-delete ‘<table name>’, ‘<row>’, ‘<column name >’, ‘<time stamp>’
+delete '<table name>', '<row>', '<column name >', '<time stamp>'
 delete 'emp', '1', 'personal data:city',
 
-deleteall ‘<table name>’, ‘<row>’,
+deleteall '<table name>', '<row>',
 deleteall 'emp','1'
 ```
 
@@ -178,6 +178,6 @@ grant 'Tutorialspoint', 'RWXCA'
 revoke <user>
 revoke 'Tutorialspoint'
 
-user_permission ‘tablename’
+user_permission 'tablename'
 user_permission 'emp'
 ```
