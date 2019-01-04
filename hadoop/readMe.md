@@ -39,7 +39,36 @@ bin/hadoop fs -ls /user
 ```
 
 ## yarn
-ResourceManager Web UI
+- etc/hadoop/mapred-site.xml
+```
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+```
+
+- etc/hadoop/yarn-site.xml
+```
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+</configuration>
+```
+- Start ResourceManager daemon and NodeManager daemon
+```
+sbin/start-yarn.sh
+```
+
+- ResourceManager Web UI
 ```
 http://localhost:8088/
+```
+
+- stop the daemons
+```
+sbin/stop-yarn.sh
 ```
