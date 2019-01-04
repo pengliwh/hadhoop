@@ -38,6 +38,18 @@ bin/hdfs namenode -format
 sbin/start-dfs.sh
 ```
 
+- 问题
+每次重启启动hadoop时，DataNode就会失效，那是因为默认的tmp文件每次重新开机会被清空，与此同时namenode的格式化信息就会丢失
+需要修改core-site.xml， 加入一下信息
+```
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/home/chjzh/hadoop_tmp</value>
+        <description>A base for other temporary directories.</description>
+    </property>
+```
+新建需要用到的目录，并赋予修改的权限
+
 - NameNode web UI
 ```
 http://192.168.116.129:50070
