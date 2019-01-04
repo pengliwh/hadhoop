@@ -1,24 +1,58 @@
-## hadoop shell
-
-- hadoop shell
+## Configuration and start hdfs
+### Configuration
+- etc/hadoop/core-site.xml
 ```
-https://www.cnblogs.com/lzfhope/p/6952869.html
-http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
 ```
 
-- start namenode daemon and datanode daemon
+- etc/hadoop/hdfs-site.xml
+```
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
+```
+
+- Setup passphraseless ssh
+```
+  $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+  $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+  $ chmod 0600 ~/.ssh/authorized_keys
+```
+
+### Execution
+- Format the filesystem
+```
+bin/hdfs namenode -format
+```
+
+- Start NameNode daemon and DataNode daemon
 ```
 sbin/start-dfs.sh
 ```
 
-- namenode web UI
+- NameNode web UI
 ```
 http://192.168.116.129:50070
 ```
 
-- stop
+- stop hdfs
 ```
- sbin/stop-dfs.sh
+sbin/stop-dfs.sh
+```
+
+## hadoop shell
+- doc
+```
+https://www.cnblogs.com/lzfhope/p/6952869.html
+http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html
 ```
 
 - hadoop shell
