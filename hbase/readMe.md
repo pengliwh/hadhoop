@@ -1,5 +1,5 @@
 
-## hive官方手册
+## hbase官方手册
 http://hbase.apache.org/book.html#quickstart
 
 ## Running on a single-node, standalone instance of HBase
