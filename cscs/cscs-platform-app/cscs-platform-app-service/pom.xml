@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.chinacscs.platform</groupId>
+		<artifactId>cscs-platform-app</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>cscs-platform-app-service</artifactId>
+	<name>cscs-platform-app-service</name>
+
+	<dependencies>
+		<!--内部模块依赖 -->
+		<dependency>
+			<groupId>com.chinacscs.platform</groupId>
+			<artifactId>cscs-platform-app-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!--内部模块依赖 -->
+
+		<!--jdk模块化依赖 -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+		</dependency>
+		<!--jdk模块化依赖 -->
+
+		<!--中间件依赖 -->
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-framework</artifactId>
+		</dependency>
+		<!--中间件依赖 -->
+
+		<!--数据持久层依赖 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+		<!--数据持久层依赖 -->
+
+		<!--spring组件依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<!--spring组件依赖 -->
+	</dependencies>
+
+	<!--这里配置多环境配置打包 -->
+	<profiles>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env.devMode>test</env.devMode>
+				<skipAssemblyDEV>true</skipAssemblyDEV>
+				<skipAssemblyQA>false</skipAssemblyQA>
+				<skipAssemblyPRODUCT>true</skipAssemblyPRODUCT>
+				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
+			</properties>
+		</profile>
+		<profile>
+			<id>product</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<env.devMode>product</env.devMode>
+				<skipAssemblyDEV>true</skipAssemblyDEV>
+				<skipAssemblyQA>true</skipAssemblyQA>
+				<skipAssemblyPRODUCT>false</skipAssemblyPRODUCT>
+				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
+			</properties>
+		</profile>
+	</profiles>
+	<!--这里配置多环境配置打包 -->
+	
+	<build>
+		<plugins>
+			<!-- 打包配置 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly-test</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<skipAssembly>${skipAssemblyTEST}</skipAssembly>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-test.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>make-assembly-product</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<skipAssembly>${skipAssemblyPRODUCT}</skipAssembly>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-product.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

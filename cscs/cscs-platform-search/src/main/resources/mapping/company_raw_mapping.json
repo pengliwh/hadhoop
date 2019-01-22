@@ -1,0 +1,23 @@
+{
+	"settings": {
+		"index": {
+			"number_of_shards": "3",
+			"number_of_replicas": "1"
+		}
+	},
+	"mappings": {
+		"company_": {
+			"properties": {
+				"id": {
+					"type": "long"
+				},
+				"raw": {
+					"type": "keyword"
+				},
+				"status": {
+					"type": "keyword"
+				}
+			}
+		}
+	}
+}

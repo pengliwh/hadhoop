@@ -1,0 +1,105 @@
+{
+	"settings": {
+		"index": {
+			"number_of_shards": "4",
+			"number_of_replicas": "1"
+		},
+		"analysis": {
+			"filter": {
+				"company_name_stopwords": {
+					"type": "stop",
+					"stopwords": [
+						"有限", "责任", "公司", "有限公司", "责任公司", "有限责任公司", "无限责任公司"
+					]
+				}
+			},
+			"analyzer": {
+				"index_company_name_analyzer": {
+					"type": "custom",
+					"tokenizer": "ik_max_word",
+					"filter": [
+						"company_name_stopwords"
+					]
+				},
+				"search_company_name_analyzer": {
+					"type": "custom",
+					"tokenizer": "ik_smart",
+					"filter": [
+						"company_name_stopwords"
+					]
+				}
+			}
+		}
+	},
+	"mappings": {
+		"company": {
+			"properties": {
+				"id": {
+					"type": "long"
+				},
+				"code": {
+					"type": "keyword"
+				},
+				"name": {
+					"type": "text",
+					"analyzer": "index_company_name_analyzer",
+					"search_analyzer": "search_company_name_analyzer",
+					"fields": {
+						"raw": {
+							"type": "keyword",
+							"index": "not_analyzed"
+						}
+					}
+				},
+				"stock_code": {
+					"type": "keyword"
+				},
+				"stock_name": {
+					"type": "keyword"
+				},
+				"legal_person_name": {
+					"type": "keyword"
+				},
+				"hairman_name": {
+					"type": "keyword"
+				},
+				"general_manager_name": {
+					"type": "keyword"
+				},
+				"type": {
+					"type": "keyword"
+				},
+				"industry": {
+					"type": "keyword"
+				},
+				"status": {
+					"type": "keyword"
+				},
+				"found_date": {
+					"type": "date",
+					"format": "yyyy-MM-dd"
+				},
+				"register_capital": {
+					"type": "double"
+				},
+				"register_region": {
+					"type": "keyword"
+				},
+				"email": {
+					"type": "keyword"
+				},
+				"phone": {
+					"type": "keyword"
+				},
+				"address": {
+					"type": "text",
+					"analyzer": "ik_max_word"
+				},
+				"business_scope": {
+					"type": "text",
+					"analyzer": "ik_max_word"
+				}
+			}
+		}
+	}
+}

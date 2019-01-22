@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.chinacscs.platform</groupId>
+		<artifactId>cscs-platform</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>cscs-platform-search</artifactId>
+	<name>cscs-platform-search</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>>
+		</dependency>
+
+		<!--内部模块依赖 -->
+		<dependency>
+			<groupId>com.chinacscs.platform</groupId>
+			<artifactId>cscs-platform-commons</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!--内部模块依赖 -->
+
+		<!--jdk模块化依赖 -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+		</dependency>
+		<!--jdk模块化依赖 -->
+
+		<!--组件依赖 -->
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-memory</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-join</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-suggest</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-misc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-backward-codecs</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-grouping</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-queries</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-analyzers-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-sandbox</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-queryparser</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-spatial</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-highlighter</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-spatial3d</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-spatial-extras</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.elasticsearch</groupId>
+					<artifactId>elasticsearch-cli</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.elasticsearch</groupId>
+					<artifactId>elasticsearch-secure-sm</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--组件依赖 -->
+
+		<!--spring组件依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--spring组件依赖 -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<env.devMode>dev</env.devMode>
+				<skipAssemblyDEV>false</skipAssemblyDEV>
+				<skipAssemblyQA>true</skipAssemblyQA>
+				<skipAssemblyPRODUCT>true</skipAssemblyPRODUCT>
+				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env.devMode>test</env.devMode>
+				<skipAssemblyDEV>true</skipAssemblyDEV>
+				<skipAssemblyQA>false</skipAssemblyQA>
+				<skipAssemblyPRODUCT>true</skipAssemblyPRODUCT>
+				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
+			</properties>
+		</profile>
+		<profile>
+			<id>product</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<env.devMode>product</env.devMode>
+				<skipAssemblyDEV>true</skipAssemblyDEV>
+				<skipAssemblyQA>true</skipAssemblyQA>
+				<skipAssemblyPRODUCT>false</skipAssemblyPRODUCT>
+				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
+			</properties>
+		</profile>
+	</profiles>
+	<build>
+		<finalName>${project.name}-${project.version}</finalName>
+		<plugins>
+			<!-- 打包配置 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly-dev</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<!--profile声明参数调用:mvn clean package -P dev -->
+							<!--是否跳过这个执行器。true:跳过;false:不跳过 -->
+							<skipAssembly>${skipAssemblyDEV}</skipAssembly>
+							<descriptors>
+								<!--加载指定的assembly配置文件 -->
+								<descriptor>assembly/assembly-dev.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>make-assembly-test</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<skipAssembly>${skipAssemblyTEST}</skipAssembly>
+							<descriptors>
+								<descriptor>assembly/assembly-test.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>make-assembly-product</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<skipAssembly>${skipAssemblyPRODUCT}</skipAssembly>
+							<descriptors>
+								<descriptor>assembly/assembly-product.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

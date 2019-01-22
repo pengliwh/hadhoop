@@ -1,0 +1,215 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": "3",
+      "number_of_replicas": "1"
+    },
+    "analysis": {
+      "filter": {
+        "company_name_stopwords": {
+          "type": "stop",
+          "stopwords": [
+            "有限",
+            "责任",
+            "公司",
+            "有限公司",
+            "责任公司",
+            "有限责任公司",
+            "无限责任公司"
+          ]
+        }
+      },
+      "analyzer": {
+        "index_company_name_analyzer": {
+          "type": "custom",
+          "tokenizer": "ik_max_word",
+          "filter": [
+            "company_name_stopwords"
+          ]
+        },
+        "search_company_name_analyzer": {
+          "type": "custom",
+          "tokenizer": "ik_smart",
+          "filter": [
+            "company_name_stopwords"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "company_risk_search": {
+      "properties": {
+        "company_id": {
+          "type": "long"
+        },
+        "company_nm": {
+          "type": "text",
+          "analyzer": "index_company_name_analyzer",
+          "search_analyzer": "search_company_name_analyzer",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "company_type": {
+          "type": "keyword"
+        },
+        "reg_region": {
+          "type": "keyword"
+        },
+        "industry": {
+          "type": "keyword"
+        },
+        "found_dt": {
+          "type": "date",
+          "format": "yyyy-MM-dd"
+        },
+        "company_st": {
+          "type": "keyword"
+        },
+        "legal_person_nm": {
+          "type": "keyword"
+        },
+        "chairman": {
+          "type": "keyword"
+        },
+        "gmanager": {
+          "type": "keyword"
+        },
+        "title": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "subject": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "author": {
+          "type": "keyword"
+        },
+        "description": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "comments": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "keywords": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "category": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "resourcename": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "url": {
+          "type": "keyword"
+        },
+        "content_type": {
+          "type": "keyword"
+        },
+        "last_modified": {
+          "type": "date",
+          "format": "yyyy-MM-dd hh:mm:ss"
+        },
+        "links": {
+          "type": "keyword"
+        },
+        "security_cd_multi": {
+          "type": "keyword"
+        },
+        "security_cd": {
+          "type": "keyword"
+        },
+        "security_snm_multi": {
+          "type": "keyword"
+        },
+        "security_snm": {
+          "type": "keyword"
+        },
+        "credit_cd": {
+          "type": "keyword"
+        },
+        "regcapital": {
+          "type": "double"
+        },
+        "isbond": {
+          "type": "keyword"
+        },
+        "bondtype": {
+          "type": "keyword"
+        },
+        "auditadvice": {
+          "type": "keyword"
+        },
+        "risk_json": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "prio": {
+          "type": "keyword"
+        },
+        "dt": {
+          "type": "date",
+          "format": "yyyy-MM-dd hh:mm:ss"
+        },
+        "risk_type": {
+          "type": "keyword"
+        },
+        "copybondtype": {
+          "type": "keyword"
+        },
+        "part_search": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "fuzzy_search": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "full_search": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "content": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "text": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "text_rev": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "manu_exact": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        }
+      }
+    }
+  }
+}

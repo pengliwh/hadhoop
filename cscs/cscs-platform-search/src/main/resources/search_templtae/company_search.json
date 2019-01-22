@@ -1,0 +1,27 @@
+{
+	"query": {
+		"bool": {
+			"must": [
+			],
+			"should": [{
+					"term": {
+						"industry": "{{industry}}"
+					}
+				},
+
+				{
+					"query_string": {
+						"default_field": "name",
+						"query": "{{name}}"
+					}
+				}
+			]
+		}
+	},
+
+	"from": 0,
+	"size": 10,
+	"sort": [
+
+	]
+}

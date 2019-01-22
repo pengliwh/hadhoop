@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chinacscs.usercenter.repository.dao.ResourceDao" >
+
+    <resultMap id="EntityResult" type="com.chinacscs.usercenter.repository.entity.ResourceEntity" >
+        <id column="id"                          property="id"              jdbcType="INTEGER" />
+        <result column="app_id"                  property="appId"           jdbcType="INTEGER" />
+        <result column="name"                    property="name"            jdbcType="VARCHAR" />
+        <result column="type"                    property="type"            jdbcType="VARCHAR" />
+        <result column="path"                    property="path"            jdbcType="VARCHAR" />
+        <result column="depth"                   property="depth"           jdbcType="INTEGER" />
+        <result column="parent_id"               property="parentId"        jdbcType="VARCHAR" /> 
+        <result column="version"                 property="version"         jdbcType="INTEGER" />
+        <result column="update_user_id"          property="updateUserId"    jdbcType="INTEGER" />
+        <result column="update_date"             property="updateDate"      jdbcType="TIMESTAMP" />
+        <result column="create_user_id"          property="createUserId"    jdbcType="VARCHAR" />
+        <result column="create_date"             property="createDate"      jdbcType="INTEGER" />
+    </resultMap>
+    
+    <parameterMap id="EntityParameter" type="com.chinacscs.usercenter.repository.entity.ResourceEntity"/>
+    
+    <!-- 表名-->
+    <sql id="table_name">resource</sql>
+    
+    <!-- 查询通用列 -->
+    <sql id="select_common_column">
+    	select `id`,
+    		   `app_id`,
+    		   `name`,
+    		   `type`,
+    		   `path`,
+    		   `depth`,
+    		   parent_id,
+    		   `version`,
+    		   update_user_id,
+    		   update_date,
+    		   create_user_id,
+    		   create_date
+    </sql>
+    
+	<select id="get" resultMap="EntityResult">
+		<include refid="select_common_column"/>
+		from 
+		<include refid="table_name"/>
+        where `id`=#{id}
+    </select>
+    
+    <insert id="add" parameterMap="EntityParameter">
+    	insert into 
+    	<include refid="table_name"/>
+    	       (`id`,
+    	        app_id,
+    	        `name`,
+    	        `type`,
+    	        `path`,
+    	        `depth`,
+    	        parent_id,
+    	        update_user_id,
+    	        create_user_id)
+    	 values(#{id},
+    	        #{appId},
+    	        #{name},
+    	        #{type},
+    	        #{path},
+    	        #{depth},
+    	        #{parentId},
+    	        #{updateUserId},
+    	        #{createUserId})
+	</insert>
+	
+	<delete id="delete">
+		delete from
+		<include refid="table_name"/>
+		where `id`=#{id}  
+	</delete>
+	
+	<select id="listByAppId" resultMap="EntityResult">
+		<include refid="select_common_column"/>
+		from 
+		<include refid="table_name"/>
+        where is_deleted=0
+        and `app_id`=#{appId}
+    </select>
+    
+    <select id="listAll" resultMap="EntityResult">
+		<include refid="select_common_column"/>
+		from 
+		<include refid="table_name"/>
+    </select>
+</mapper>
