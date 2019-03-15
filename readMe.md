@@ -5,6 +5,7 @@ http://hadoop.apache.org/
 ## Hive
 https://www.yiibai.com/hive/hive_create_table.html
 https://cwiki.apache.org/confluence/display/Hive/GettingStarted
+https://cwiki.apache.org/confluence/display/Hive/Home#Home-ApacheHive
 ```
 hive
 use cscs_sandbox;
