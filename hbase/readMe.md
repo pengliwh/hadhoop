@@ -97,6 +97,9 @@ http://hbase.apache.org/book.html#quickstart
 ### Hbase shell
 ```
 ./bin/hbase shell
+status    查询服务器状态
+version   查询服务器版本
+show table
 create 'test', 'cf'
 list 'test'
 describe 'test' | desc 'test'   查看表结构
@@ -106,6 +109,7 @@ put 'test', 'row2', 'cf:b', 'value2'
 put 'test', 'row3', 'cf:c', 'value3'
 scan 'test'
 get 'test', 'row1'
+get 'portal:company_base','513847','data:security_cd'
 disable 'test'
 enable 'test'
 drop 'test'
