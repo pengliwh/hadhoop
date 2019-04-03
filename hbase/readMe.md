@@ -99,7 +99,7 @@ http://hbase.apache.org/book.html#quickstart
 ./bin/hbase shell
 create 'test', 'cf'
 list 'test'
-describe 'test' | desc 'test'
+describe 'test' | desc 'test'   查看表结构
 show create table 'test'
 put 'test', 'row1', 'cf:a', 'value1'
 put 'test', 'row2', 'cf:b', 'value2'
